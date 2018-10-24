@@ -2,6 +2,8 @@ CFLAGS   = -shared -fpic -fobjc-link-runtime /usr/lib/libxcselect.dylib
 CC       = clang
 SDK_ROOT := `xcrun -sdk macosx -show-sdk-path`
 DS_OUTPUT := "plugin load \"$(PWD)/lldb_fix.dylib\""
+test:
+	@echo $(DS_CLEAN_OUTPUT)
 
 all: lldb_fix.c
 	$(CC) $? -isysroot $(SDK_ROOT) -o lldb_fix.dylib $(CFLAGS)	
@@ -13,4 +15,5 @@ install: all
 
 clean:
 	-rm -f lldb_fix.dylib
-	sed -e '/$(shell echo $$DS_OUTPUT)/d' ~/.lldbinit
+	sed -i -e '/plugin load .*lldb_fix.dylib/d' ~/.lldbinit
+	@echo Removed $(DS_OUTPUT) in .lldbinit file
