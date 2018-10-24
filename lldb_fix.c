@@ -32,13 +32,14 @@ static void dsprintf(const char *format, ...) {
   static int quiet_mode = 0;
   if (quiet_mode == 0) {
     quiet_mode = getenv("DS_QUIET") ? 1 : -1;
-    return;
   }
   if (quiet_mode == 1) { return; }
+  printf("\033[36;1m");
   va_list args;
   va_start(args, format);
   vprintf(format, args);
   va_end( args );
+  printf("\033[0m");
 }
 
 ////////////////////////////////////////////////////////////
@@ -46,14 +47,16 @@ static void dsprintf(const char *format, ...) {
 /// Function to intercept "bad" PlatformMacOSX::AddClangModuleCompilationOptions
 __attribute__((used)) static void *hellz_yeah(void *platform, void * target, void *junk, SDKType sdktype) {
   
-  dsprintf("caught problematic function changing MacOSX SDK to ");
+  dsprintf("Caught problematic function, changing \"MacOSX\" SDK to ");
   switch (ResolvedSDK) {
     case MacOSX:
-      dsprintf("MacOSX\n");
+      dsprintf("\"MacOSX\"\n");
+      break;
     case iPhoneSimulator:
-      dsprintf("iPhoneSimulator\n");
+      dsprintf("\"iPhoneSimulator\"\n");
+      break;
     case iPhoneOS:
-      dsprintf("iPhoneOS\n");
+      dsprintf("\"iPhoneOS\"\n");
       break;
   }
   
