@@ -199,8 +199,8 @@ __attribute__((used)) int _ZN4lldb16PluginInitializeENS_10SBDebuggerE(void *dbg)
   // check for the problematic LLDB version
   char *lldb_version = (char*)address_for_function("_LLDBVersionString");
   if (!lldb_version) { return 0; }
-  if (strcmp(lldb_version, "@(#)PROGRAM:LLDB  PROJECT:lldb-1000.11.37.1\n") != 0) {
-    dsprintf("cowardly refusing to patch LLDB.framework, problem version is 1000.11.37.1, you are running %s\n", lldb_version);
+  if (strcmp(lldb_version, "@(#)PROGRAM:LLDB  PROJECT:lldb-1000.11.37.1\n") != 0 && strcmp(lldb_version, "@(#)PROGRAM:LLDB  PROJECT:lldb-1000.11.38.2\n") != 0) {
+    dsprintf("cowardly refusing to patch LLDB.framework, problem version is 1000.11.37.1 (Xcode 10.0) or lldb-1000.11.38.2 (Xcode 10.1), you are running \"%s\"\n", lldb_version);
     return 0;
   }
   
