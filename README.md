@@ -43,6 +43,8 @@ This is a big problem, since this also cripples a couple chapters in my [Advance
 
 This means that users would need to use a different version of LLDB or find a way to get around this problem...
 
+[You can see a tweet thread about this here](https://twitter.com/LOLgrep/status/1055172805535264768)
+
 ## How
 
 The TLDR: This code will hunt for the location of a problematic c++ function and attempts to overwrite the pointer in a c++ vtable to code I control, correctly setting the SDK type bassed upon the environment variable **LLDB_SDK**
