@@ -1,5 +1,8 @@
 # lldb_fix
 
+## Resolved in Xcode 10.2
+
+This fix only pertains to Xcode 10.0-10.1, no longer needed in Xcode 10.2
 
 ## Huh? 
 This is a fix which patches LLDB v`lldb-1000.11.37.1`, which has a nasty little bug that incorrectly imports the wrong SDK when debugging via a Terminal session. For example, if you were to debug an iOS Simulator application via Terminal, LLDB will import the wrong SDK headers which prevents you from executing code correctly in that process. By default, this version of LLDB will import the MacOSX headers resulting in many scripts breaking in [Facebook's Chisel repository](https://github.com/facebook/chisel) as well as [many of my "Advanced Debugging and Reverse Engineering" scripts of my own found here](https://github.com/DerekSelander/LLDB/)
